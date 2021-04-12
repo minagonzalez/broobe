@@ -6,11 +6,11 @@ Version: 1.0
 Author: Mina
 */
 
-// Our custom post type function
+// Funcion del custom post type
 function create_posttype() {
  
     register_post_type( 'jobapplications',
-    // CPT Options
+    // CPT Opciones
         array(
             'labels' => array(
                 'name' => __( 'Job Applications' ),
@@ -24,13 +24,10 @@ function create_posttype() {
         )
     );
 }
-// Hooking up our function to theme setup
+// Inicializo el CPT en el theme
 add_action( 'init', 'create_posttype' );
 
 
-/*
-* Creating a function to create our CPT
-*/
  
 function custom_post_type() {
  
@@ -51,7 +48,7 @@ function custom_post_type() {
             'not_found_in_trash'  => __( 'Not found in Trash', 'twentytwentyone' ),
         );
          
-    // Set other options for Custom Post Type
+    // Otras opciones Custom Post Type
          
         $args = array(
             'label'               => __( 'jobapplications', 'twentytwentyone' ),
@@ -81,7 +78,7 @@ function custom_post_type() {
      
         );
          
-        // Registering your Custom Post Type
+        // Registro mi Custom Post Type
         register_post_type( 'jobapplications', $args );
      
     }
@@ -215,7 +212,8 @@ function formulario_job_applications() {
     // Cuidado con el último igual de la condición del if que es doble
     if ($_POST['nombre'] != ''
         AND is_email($_POST['email'])
-        AND $_POST['empleo'] != ''    
+        AND $_POST['empleo'] != ''
+        AND $_POST['edad'] > 0    
     ) {
         $tabla_broobe = $wpdb->prefix . 'broobe'; 
         $nombre = sanitize_text_field($_POST['nombre']);
@@ -240,7 +238,7 @@ function formulario_job_applications() {
 
     ob_start();
     ?> 
-    <form action="<?php get_the_permalink(); ?>" method="post" id="broobe-form">
+    <form action="" method="post" id="broobe-form">
 
             <div class="elem-group" id="item-1">
                 <label for="nombre">Nombre y Apellido </label>
